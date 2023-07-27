@@ -1,0 +1,104 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gdrive to VLC link generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            background-image: url("https://ksassets.timeincuk.net/wp/uploads/sites/54/2018/02/vlc_img-920x518.png");
+            background-position: center;
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            width: 50vw;
+            padding: 25px;
+            padding-right:40px;
+            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            align: center;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            font-weight:bold;
+            margin-bottom: 10px;
+        }
+
+        .fieldtext {
+            width:100%;
+            font-size: 16px;
+            padding:10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            display: block;
+  			margin-right: 5px;
+            opacity:1;
+  			
+        }
+
+        button {
+            display: block;
+            width: 103%;
+            padding: 10px;
+            margin: -10px 0;
+            margin-bottom:10px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        textarea {
+            height: 100px;
+            resize: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>VLC link generator</h1>
+        <label for="urlInput">Enter URL:</label>
+        <input type="text" class="fieldtext" id="urlInput" placeholder="paste gdrive link"><br><br>
+        <button onclick="splitURL()">Generate</button>
+        <p><strong>Result:</strong></p>
+        <textarea id="output" class="fieldtext" placeholder = "VLC link generates here"></textarea><br><br>
+        <button onclick="copyword()">Copy</button>
+    </div>
+
+    <script>
+        function splitURL() {
+            var urlInput = document.getElementById("urlInput").value;
+            var parts = urlInput.split("/");
+            var outputElement = document.getElementById("output");
+            var outputText = parts[5]
+            outputElement.innerHTML = "https://www.googleapis.com/drive/v3/files/" + outputText + "?alt=media&key=YOUR_GOOGLE_API_KEY";
+        }
+        function copyword() {
+            var textArea = document.getElementById("output");
+            textArea.select();
+            document.execCommand("Copy");
+            alert("link copied");
+        }
+    </script>
+</body>
+</html>
